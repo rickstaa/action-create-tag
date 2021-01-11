@@ -17,6 +17,7 @@ inputs:
   force_push_tag:
     description: "Optional. Force push the tag. Defaults to 'false'."
     required: false
+    default: "false"
 runs:
   using: "docker"
   image: "Dockerfile"
