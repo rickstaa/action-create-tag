@@ -1,0 +1,25 @@
+name: "Create tag."
+description: "Creates tags on a tag push."
+author: "Rick Staa"
+inputs:
+  github_token:
+    description: "GITHUB_TOKEN. Optional if you use checkout@v2 action."
+    default: "${{ github.token }}"
+  tag:
+    description: "Optional. Existing tag to update from. Default comes from $GITHUB_REF."
+    required: false
+  message:
+    description: "Tag message."
+    required: false
+  commit_sha:
+    description: The commit SHA hash on which you want to push the tag. Uses latest commit by default.
+    required: false
+  force_push_tag:
+    description: "Optional. Force push the tag. Defaults to 'false'."
+    required: false
+runs:
+  using: "docker"
+  image: "Dockerfile"
+branding:
+  icon: "tag"
+  color: "blue"
