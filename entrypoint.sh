@@ -4,7 +4,7 @@ set -x
 cd "${GITHUB_WORKSPACE}" || exit
 
 if [ -z "${INPUT_TAG}" ]; then
-  echo "No-tag was supplied! Please supply a tag."
+  echo "[action-create-tag] No-tag was supplied! Please supply a tag."
   exit 1
 fi
 
