@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+set -eu
 
 cd "${GITHUB_WORKSPACE}" || exit
 
@@ -13,12 +13,12 @@ TAG="${INPUT_TAG}"
 MESSAGE="${INPUT_MESSAGE:-Release ${TAG}}"
 FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
 
-# Set up Git credentials
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-# Update MAJOR/MINOR tag
-if [ "${INPUT_FORCE_PUSH_TAG}" == 'true' ]; then
+# Create tag
+echo "[action-create-tag] Create tag '${TAG}'."
+if [ "${INPUT_FORCE_PUSH_TAG}" = 'true' ]; then
   git tag -fa "${TAG}" -m "${MESSAGE}"
 else
   git tag -a "${TAG}" -m "${MESSAGE}"
@@ -30,8 +30,10 @@ if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
 fi
 
 # Push tag
-if [ "${INPUT_FORCE_PUSH_TAG}" == 'true' ]; then
+if [ "${INPUT_FORCE_PUSH_TAG}" = 'true' ]; then
+  echo "[action-create-tag] Force push tag '${TAG}'."
   git push --force origin "${TAG}"
 else
+  echo "[action-create-tag] Push tag '${TAG}'."
   git push origin "${TAG}"
 fi
