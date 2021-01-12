@@ -1,5 +1,5 @@
-name: "Git tag"
-description: "Adds a git tag to a given commit."
+name: "Create/Update tag"
+description: "Creates or updates a tag for a given commit."
 author: "Rick Staa"
 inputs:
   github_token:

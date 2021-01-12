@@ -5,7 +5,7 @@
 [![release](https://github.com/rickstaa/action-create-tag/workflows/release/badge.svg)](https://github.com/rickstaa/action-create-tag/actions?query=workflow%3Arelease)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/rickstaa/action-create-tag?logo=github&sort=semver)](https://github.com/rickstaa/action-create-tag/releases)
 
-Simple GitHub action that can be used to create and push a tag inside a GitHub action.
+Simple GitHub action that can be used to create/update a tag and push it to the remote.
 
 ## Inputs
 
