@@ -6,8 +6,8 @@ inputs:
     description: "GITHUB_TOKEN. Optional if you use checkout@v2 action."
     default: "${{ github.token }}"
   tag:
-    description: "Optional. Existing tag to update from. Default comes from $GITHUB_REF."
-    required: false
+    description: "Tag you want to create or update."
+    required: true
   message:
     description: "Tag message."
     required: false
