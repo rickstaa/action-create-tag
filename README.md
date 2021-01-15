@@ -44,6 +44,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: rickstaa/action-create-tag@v1
         with:
-          tag: "Latest"
+          tag: "latest"
           message: "Latest release"
 ```
