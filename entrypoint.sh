@@ -12,6 +12,7 @@ fi
 TAG="${INPUT_TAG}"
 MESSAGE="${INPUT_MESSAGE:-Release ${TAG}}"
 FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
+SHA=${INPUT_COMMIT_SHA:-}
 
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
@@ -19,9 +20,9 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 # Create tag
 echo "[action-create-tag] Create tag '${TAG}'."
 if [ "${INPUT_FORCE_PUSH_TAG}" = 'true' ]; then
-  git tag -fa "${TAG}" -m "${MESSAGE}"
+  git tag -fa "${TAG}" "${SHA}" -m "${MESSAGE}"
 else
-  git tag -a "${TAG}" -m "${MESSAGE}"
+  git tag -a "${TAG}" "${SHA}" -m "${MESSAGE}"
 fi
 
 # Set up remote url for checkout@v1 action.
