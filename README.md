@@ -41,7 +41,7 @@ jobs:
   create-tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: rickstaa/action-create-tag@v1
         with:
           tag: "latest"
