@@ -1,7 +1,8 @@
 #!/bin/sh
 set -eu
 
-git config --global --add safe.directory $GITHUB_WORKSPACE
+# Apply hotfix for 'fatal: unsafe repository' error (see #10)
+git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
 cd "${GITHUB_WORKSPACE}" || exit
 
