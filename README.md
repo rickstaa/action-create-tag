@@ -47,3 +47,7 @@ jobs:
           tag: "latest"
           message: "Latest release"
 ```
+
+## Contributing
+
+Feel free to open an issue if you have ideas on how to make this GitHub action better or if you want to report a bug! All contributions are welcome. :rocket: Please consult the [contribution guideliness](CONTRIBUTING.md) for more information.
