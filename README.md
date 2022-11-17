@@ -21,6 +21,10 @@ Simple GitHub action that can be used to create/update a tag and push it to the 
 
 **Optional**. Push tag even if it already exists on the remote. Default: `false`. Please use with care!
 
+### `no_verify_tag`
+
+**Optional**. Skips verifying when pushing the tag. Default: `false`. Please use with care!
+
 ### `commit_sha`
 
 **Optional**. The commit SHA hash on which you want to push the tag. Uses latest commit by default.
