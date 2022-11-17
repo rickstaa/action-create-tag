@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.17
 
 RUN apk --no-cache add git git-lfs && \
     rm -rf /var/lib/apt/lists/*
