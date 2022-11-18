@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -eu
 
 # Apply hotfix for 'fatal: unsafe repository' error (see #10)
@@ -12,7 +12,7 @@ if [ -z "${INPUT_TAG}" ]; then
 fi
 
 # Set up variables.
-TAG="${INPUT_TAG// /_}"
+TAG=$(echo "${INPUT_TAG}" | sed 's/ /_/g')
 MESSAGE="${INPUT_MESSAGE:-Release ${TAG}}"
 FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
 SHA=${INPUT_COMMIT_SHA:-${GITHUB_SHA}}
