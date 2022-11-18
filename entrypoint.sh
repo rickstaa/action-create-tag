@@ -39,7 +39,7 @@ if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
 fi
 
 # Handle no-verify action input.
-if ["${NO_VERIFY}" = 'true' ]; then
+if [ "${NO_VERIFY}" = 'true' ]; then
   FLAGS="${FLAGS} --no-verify"
   ACTION_OUTPUT_MESSAGE="${ACTION_OUTPUT_MESSAGE}, with --no-verify"
 fi
