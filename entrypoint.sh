@@ -12,7 +12,7 @@ if [ -z "${INPUT_TAG}" ]; then
 fi
 
 # Set up variables.
-TAG="${INPUT_TAG}"
+TAG=$(echo "${INPUT_TAG}" | sed 's/ /_/g')
 MESSAGE="${INPUT_MESSAGE:-Release ${TAG}}"
 FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
 NO_VERIFY="${INPUT_NO_VERIFY_TAG:-false}"
