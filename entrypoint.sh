@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
 # Apply hotfix for 'fatal: unsafe repository' error (see #10)
