@@ -28,7 +28,7 @@ echo "[action-create-tag] Create tag '${TAG}'."
 if [ "${FORCE_TAG}" = 'true' ]; then
   git tag -fa "${TAG}" "${SHA}" -m "${MESSAGE}"
   FLAGS="${FLAGS} --force"
-  ACTION_OUTPUT_MESSAGE="$ACTION_OUTPUT_MESSAGE, with --force"
+  ACTION_OUTPUT_MESSAGE="${ACTION_OUTPUT_MESSAGE}, with --force"
 else
   git tag -a "${TAG}" "${SHA}" -m "${MESSAGE}"
 fi
@@ -41,7 +41,7 @@ fi
 # Handle no-verify action input.
 if ["${NO_VERIFY}" = 'true' ]; then
   FLAGS="${FLAGS} --no-verify"
-  ACTION_OUTPUT_MESSAGE="$ACTION_OUTPUT_MESSAGE, with --no-verify"
+  ACTION_OUTPUT_MESSAGE="${ACTION_OUTPUT_MESSAGE}, with --no-verify"
 fi
 
 # Push tag.
