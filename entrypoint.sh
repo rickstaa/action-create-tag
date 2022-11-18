@@ -12,7 +12,7 @@ if [ -z "${INPUT_TAG}" ]; then
 fi
 
 # Set up variables.
-TAG="${INPUT_TAG}"
+TAG=$(echo "${INPUT_TAG}" | sed 's/ /_/g')
 MESSAGE="${INPUT_MESSAGE:-Release ${TAG}}"
 FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
 SHA=${INPUT_COMMIT_SHA:-${GITHUB_SHA}}
