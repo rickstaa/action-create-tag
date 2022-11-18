@@ -18,6 +18,10 @@ inputs:
     description: "Optional. Force push the tag. Defaults to 'false'."
     required: false
     default: "false"
+  no_verify_tag:
+    description: "Optional. Skips verifying when pushing the tag. Defaults to 'false'."
+    required: false
+    default: "false"
 runs:
   using: "docker"
   image: "Dockerfile"
