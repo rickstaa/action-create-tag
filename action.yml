@@ -19,7 +19,7 @@ inputs:
     required: false
     default: "false"
   no_verify_tag:
-    description: "Optional. Skips verifying when pushing the tag."
+    description: "Optional. Skips verifying when pushing the tag. Defaults to 'false'."
     required: false
     default: "false"
 runs:
