@@ -14,7 +14,7 @@ fi
 # Set up variables.
 FLAGS=""
 TAG=$(echo "${INPUT_TAG}" | sed 's/ /_/g')
-ACTION_OUTPUT_MESSAGE="[action-create-tag] Push tag ${TAG}"
+ACTION_OUTPUT_MESSAGE="[action-create-tag] Push tag '${TAG}'"
 MESSAGE="${INPUT_MESSAGE:-Release ${TAG}}"
 FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
 NO_VERIFY="${INPUT_NO_VERIFY_TAG:-false}"
