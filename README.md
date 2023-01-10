@@ -8,7 +8,7 @@
 Simple (docker-based) GitHub action that can be used to create/update a tag and push it to the remote.
 
 > **Note**
-> Since this is a docker-based action and [GitHub currently only supports Linux-based containers](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action) running this action on Windows and Mac now needs to be supported (see #26).
+> Since this is a docker-based action and [GitHub currently only supports Linux-based containers](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action) running this action on Windows and Mac now needs to be supported (see [#26](https://github.com/rickstaa/action-create-tag/issues/26)).
 
 ## Inputs
 
