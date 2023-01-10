@@ -5,9 +5,12 @@
 [![release](https://github.com/rickstaa/action-create-tag/workflows/release/badge.svg)](https://github.com/rickstaa/action-create-tag/actions?query=workflow%3Arelease)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/rickstaa/action-create-tag?logo=github&sort=semver)](https://github.com/rickstaa/action-create-tag/releases)
 
-Simple GitHub action that can be used to create/update a tag and push it to the remote.
+Simple (docker-based) GitHub action that can be used to create/update a tag and push it to the remote.
 
-## Inputs
+> **Note:**
+> Since this is a docker-based action and GitHub currently only supports Linux-based containers running this action on Windows and Mac now needs to be supported (see #26).
+
+> ## Inputs
 
 ### `tag`
 
