@@ -18,10 +18,17 @@ inputs:
     description: "Optional. Force push the tag. Defaults to 'false'."
     required: false
     default: "false"
+  tag_exists_error:
+    description: "Optional. Whether to throw an error when the tag already exists. Defaults to 'true'."
+    required: false
+    default: "true"
   no_verify_tag:
     description: "Optional. Skips verifying when pushing the tag. Defaults to 'false'."
     required: false
     default: "false"
+outputs:
+  tag_exists:
+    description: "Whether the tag already existed."
 runs:
   using: "docker"
   image: "Dockerfile"
