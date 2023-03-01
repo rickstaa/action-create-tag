@@ -24,6 +24,10 @@ Simple (docker-based) GitHub action that can be used to create/update a tag and 
 
 **Optional**. Push tag even if it already exists on the remote. Default: `false`. Please use with care!
 
+### `tag_exists_error`
+
+**Optional**. Whether to throw an error when the tag already exists. Default: `true`. Ignored when `force_push_tag` is `true`.
+
 ### `no_verify_tag`
 
 **Optional**. Skips verifying when pushing the tag. Default: `false`. Please use with care!
@@ -36,6 +40,18 @@ Simple (docker-based) GitHub action that can be used to create/update a tag and 
 
 **Optional**. It's no need to specify it if you use checkout@v2. Required for
 checkout@v1 action.
+
+## Outputs
+
+### `tag_exists`
+
+A boolean specifying whether the tag already exists.
+
+## Environment variables
+
+### `TAG_EXISTS`
+
+A boolean specifying whether the tag already exists.
 
 ## Example usage
 
@@ -50,9 +66,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
         with:
           tag: "latest"
+          tag_exists_error: false
           message: "Latest release"
+
+      # Print result using the env variable.
+      -  run: |
+          echo "Tag already present: ${{ env.TAG_EXISTS }}"
+
+      # Print result using the action output.
+      - run: |
+          echo "Tag already present: ${{ steps.tag_create.outputs.tag_exists }}"
 ```
 
 ## Contributing
