@@ -25,7 +25,7 @@ git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 # Check if tag already exists.
-if [ $(git tag -l "${TAG}")  ]; then tag_exists=true; else tag_exists=false; fi
+if [ "$(git tag -l "${TAG}")"  ]; then tag_exists=true; else tag_exists=false; fi
 echo "tag_exists=${tag_exists}" >> "${GITHUB_OUTPUT}"
 echo "TAG_EXISTS=${tag_exists}" >> "${GITHUB_ENV}"
 
@@ -62,6 +62,7 @@ if [ "${NO_VERIFY}" = 'true' ]; then
 fi
 
 # Push tag.
-[[ "${tag_exists}" = 'true' && "${FORCE_TAG}" = 'false' ]] && exit 0
+[ "${tag_exists}" = 'true' ] && [ "${FORCE_TAG}" = 'false' ] && exit 0
 echo "${ACTION_OUTPUT_MESSAGE}"
+# shellcheck disable=SC2086
 git push $FLAGS origin "$TAG"
