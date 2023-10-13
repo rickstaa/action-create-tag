@@ -34,7 +34,7 @@ Simple (docker-based) GitHub action that can be used to create/update a tag and 
 
 ### `commit_sha`
 
-**Optional**. The commit SHA hash on which you want to push the tag. Uses latest commit by default.
+**Optional**. Specify the commit SHA hash for tagging. By default, it utilizes the `GITHUB_SHA` environment variable, which typically represents the latest commit SHA hash. However, its value ultimately depends on the trigger event of the workflow. For additional details, consult the [GitHub Actions documentation](https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context).
 
 ### `github_token`
 
