@@ -64,7 +64,9 @@ jobs:
   create-tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: rickstaa/action-create-tag@v1
         id: "tag_create"
         with:
