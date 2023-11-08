@@ -41,6 +41,14 @@ Simple (docker-based) GitHub action that can be used to create/update a tag and 
 **Optional**. It's no need to specify it if you use checkout@v2. Required for
 checkout@v1 action.
 
+### `gpg_private_key`
+
+**Optional**. Specifies the GPG private key to sign the tag with. Default: `""`.
+
+### `gpg_passphrase`
+
+**Optional**. Specifies the GPG passphrase to sign the tag with. Default: `""`.
+
 ## Outputs
 
 ### `tag_exists`
