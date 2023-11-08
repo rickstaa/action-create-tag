@@ -26,6 +26,12 @@ inputs:
     description: "Optional. Skips verifying when pushing the tag. Defaults to 'false'."
     required: false
     default: "false"
+  gpg_private_key:
+    description: "Optional. GPG key to sign the tag with."
+    required: false
+  gpg_passphrase:
+    description: "Optional. GPG key passphrase."
+    required: false
 outputs:
   tag_exists:
     description: "Whether the tag already existed."

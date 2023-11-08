@@ -20,9 +20,39 @@ FORCE_TAG="${INPUT_FORCE_PUSH_TAG:-false}"
 TAG_EXISTS_ERROR="${INPUT_TAG_EXISTS_ERROR:-true}"
 NO_VERIFY="${INPUT_NO_VERIFY_TAG:-false}"
 SHA=${INPUT_COMMIT_SHA:-${GITHUB_SHA}}
+GPG_PRIVATE_KEY="${INPUT_GPG_PRIVATE_KEY:-}"
+GPG_PASSPHRASE="${INPUT_GPG_PASSPHRASE:-}"
 
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+# Configure git and gpg if GPG key is provided.
+if [ -n "${GPG_PRIVATE_KEY}" ]; then
+  # Import the GPG key.
+  echo "[action-update-semver] Importing GPG key."
+  echo "${GPG_PRIVATE_KEY}" | gpg --batch --yes --import
+
+  # If GPG_PASSPHRASE is set, unlock the key.
+  if [ -n "${GPG_PASSPHRASE}" ]; then
+    echo "[action-update-semver] Unlocking GPG key."
+    echo "${GPG_PASSPHRASE}" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 --output /dev/null --sign
+  fi
+
+  # Retrieve GPG key information.
+  public_key_id=$(gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $2}' | cut -d'/' -f2)
+  signing_key_email=$(gpg --list-keys --keyid-format=long "${public_key_id}" | grep uid | sed 's/.*<\(.*\)>.*/\1/')
+  signing_key_username=$(gpg --list-keys --keyid-format=long "${public_key_id}" | grep uid | sed 's/uid\s*\[\s*.*\]\s*//; s/\s*(.*//')
+
+  # Setup git user name, email, and signingkey.
+  echo "[action-update-semver] Setup git user name, email, and signingkey."
+  git config --global user.name "${signing_key_username}"
+  git config --global user.email "${signing_key_email}"
+  git config --global user.signingkey "${public_key_id}"
+  git config --global commit.gpgsign true
+  git config --global tag.gpgSign true
+else
+  # Setup git user name and email.
+  echo "[action-update-semver] Setup git user name and email."
+  git config --global user.name "${GITHUB_ACTOR}"
+  git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+fi
 
 # Check if tag already exists.
 if [ "$(git tag -l "${TAG}")"  ]; then tag_exists=true; else tag_exists=false; fi
@@ -50,7 +80,7 @@ else
   fi
 fi
 
-# Set up remote url for checkout@v1 action.
+# Set up remote URL for checkout@v1 action.
 if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
   git remote set-url origin "https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 fi
