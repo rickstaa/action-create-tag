@@ -1,10 +1,10 @@
 #!/bin/sh
 set -eu
 
+cd "${GITHUB_WORKSPACE}" || exit
+
 # Apply hotfix for 'fatal: unsafe repository' error (see #10).
 git config --global --add safe.directory "${GITHUB_WORKSPACE}"
-
-cd "${GITHUB_WORKSPACE}" || exit
 
 if [ -z "${INPUT_TAG}" ]; then
   echo "[action-create-tag] No-tag was supplied! Please supply a tag."
