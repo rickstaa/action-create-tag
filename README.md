@@ -53,7 +53,9 @@ A boolean specifying whether the tag already exists.
 
 A boolean specifying whether the tag already exists.
 
-## Example usage
+## Example Usage
+
+### General example
 
 ```yml
 name: Create/update tag
@@ -75,13 +77,81 @@ jobs:
           message: "Latest release"
 
       # Print result using the env variable.
-      -  run: |
-          echo "Tag already present: ${{ env.TAG_EXISTS }}"
+      - run: |
+        echo "Tag already present: ${{ env.TAG_EXISTS }}"
 
       # Print result using the action output.
       - run: |
-          echo "Tag already present: ${{ steps.tag_create.outputs.tag_exists }}"
+        echo "Tag already present: ${{ steps.tag_create.outputs.tag_exists }}"
 ```
+
+### Signing Tags with GPG
+
+To sign tags with GPG, follow these steps:
+
+#### 1. Generate a GPG Key
+
+First, [generate a GPG key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-gpg-key). Once generated, export the GPG private key in ASCII armored format to your clipboard using one of the following commands based on your operating system:
+
+- **macOS:**
+
+  ```shell
+  gpg --armor --export-secret-key joe@foo.bar | pbcopy
+  ```
+
+- **Ubuntu (GNU base64):**
+
+  ```shell
+  gpg --armor --export-secret-key joe@foo.bar -w0 | xclip -selection clipboard
+  ```
+
+- **Arch:**
+
+  ```shell
+  gpg --armor --export-secret-key joe@foo.bar | xclip -selection clipboard -i
+  ```
+
+- **FreeBSD (BSD base64):**
+
+  ```shell
+  gpg --armor --export-s[.github/workflows/update_semver.yml](.github/workflows/update_semver.yml)e your GPG passphrase.
+  ```
+
+#### 3. Update Workflow YAML
+
+Modify your workflow YAML file to include the GPG private key and passphrase in the `gpg_private_key` and `gpg_passphrase` inputs:
+
+```yaml
+name: Create/update tag
+on:
+  push:
+    branch: "main"
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: "latest"
+          tag_exists_error: false
+          message: "Latest release"
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.PASSPHRASE }}
+
+      # Print result using the env variable.
+      - run: |
+        echo "Tag already present: ${{ env.TAG_EXISTS }}"
+
+      # Print result using the action output.
+      - run: |
+        echo "Tag already present: ${{ steps.tag_create.outputs.tag_exists }}"
+```
+
+This workflow will now sign tags using the specified GPG key during tag creation.
 
 ## Contributing
 
